@@ -1,0 +1,87 @@
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "blockTime": 1666995243,
+    "meta": {
+      "err": {
+        "InstructionError": [
+          0,
+          {
+            "Custom": 0
+          }
+        ]
+      },
+      "fee": 5000,
+      "innerInstructions": [
+        {
+          "index": 0,
+          "instructions": [
+            {
+              "accounts": [0, 1, 5],
+              "data": "3Gk1SgoqeL6Exbh9ntUxaJXeXSBkUt7v8ADzv14o7UwiezWVd7f74Km82DLRLRNHv5YRsVceBhLYGxvuLCAEsHND9pJX28W9JSCWEY7Ef1PaZcrLLtL4VHrhD2i2PRHLEaArPZ47U4V",
+              "programIdIndex": 2
+            }
+          ]
+        }
+      ],
+      "loadedAddresses": {
+        "readonly": [],
+        "writable": []
+      },
+      "logMessages": [
+        "Program 1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb invoke [1]",
+        "Program log: Instruction: IdlCreateAccount",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Create Account: account Address { address: Ahs3Spb5rZpBkJPNjRpj285332ZZN4GCfLrvSWZ1z7rE, base: Some(F1dBXaTipDqfb3r8dfaWahxYcpbBQzmCUA7bjeY2Ujpu) } already in use",
+        "Program 11111111111111111111111111111111 failed: custom program error: 0x0",
+        "Program 1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb consumed 7833 of 200000 compute units",
+        "Program 1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb failed: custom program error: 0x0"
+      ],
+      "postBalances": [6022915320, 28995360, 1, 1141440, 1009200, 0],
+      "postTokenBalances": [],
+      "preBalances": [6022920320, 28995360, 1, 1141440, 1009200, 0],
+      "preTokenBalances": [],
+      "rewards": [],
+      "status": {
+        "Err": {
+          "InstructionError": [
+            0,
+            {
+              "Custom": 0
+            }
+          ]
+        }
+      }
+    },
+    "slot": 157973581,
+    "transaction": {
+      "message": {
+        "accountKeys": [
+          "BjKVLpkfgE1RzYdR6V417GpZ2QpMmwgQzxtc1wYGDLNJ",
+          "Ahs3Spb5rZpBkJPNjRpj285332ZZN4GCfLrvSWZ1z7rE",
+          "11111111111111111111111111111111",
+          "1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb",
+          "SysvarRent111111111111111111111111111111111",
+          "F1dBXaTipDqfb3r8dfaWahxYcpbBQzmCUA7bjeY2Ujpu"
+        ],
+        "header": {
+          "numReadonlySignedAccounts": 0,
+          "numReadonlyUnsignedAccounts": 4,
+          "numRequiredSignatures": 1
+        },
+        "instructions": [
+          {
+            "accounts": [0, 1, 5, 2, 3, 4],
+            "data": "cQPTgBg2iXH427kodnt6Znw",
+            "programIdIndex": 3
+          }
+        ],
+        "recentBlockhash": "7KCaMHFP1Z97pL3BbCNcfMFSAVkFWu7C46pr1DFzZV66"
+      },
+      "signatures": [
+        "55AoLMjQnPLu3evLQ8UhXjfhsTfJncujv2AZT9YKQLZnAQLjmerq1TYF6RT1jHuLPRY8q3XFNnRZDEP4WWz77rZx"
+      ]
+    }
+  },
+  "id": 1
+}

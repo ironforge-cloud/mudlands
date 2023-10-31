@@ -1,0 +1,73 @@
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "blockTime": 1683085023,
+    "meta": {
+      "computeUnitsConsumed": 18230,
+      "err": null,
+      "fee": 5000,
+      "innerInstructions": [
+        {
+          "index": 0,
+          "instructions": [
+            {
+              "accounts": [0, 1, 4],
+              "data": "3Gk1SPqbXiZ4Qy8gobY5yPLfL4Ek4iXnCHmKDLz3LsBLEygGkiSGqKjXc2w4iaDB8yy7qttqXNucuE5j39ZFVyeJLmwfbYppuNeGCoiS7BQGMVb3rrxHxUd56L9tNQXposLssxHPrdN",
+              "programIdIndex": 2
+            }
+          ]
+        }
+      ],
+      "loadedAddresses": {
+        "readonly": [],
+        "writable": []
+      },
+      "logMessages": [
+        "Program 7w4ooixh9TFgfmcCUsDJzHd9QqDKyxz4Mq1Bke6PVXaY invoke [1]",
+        "Program log: Instruction: IdlCreateAccount",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program 7w4ooixh9TFgfmcCUsDJzHd9QqDKyxz4Mq1Bke6PVXaY consumed 18230 of 200000 compute units",
+        "Program 7w4ooixh9TFgfmcCUsDJzHd9QqDKyxz4Mq1Bke6PVXaY success"
+      ],
+      "postBalances": [19997976600, 2018400, 1, 1009200, 0, 1],
+      "postTokenBalances": [],
+      "preBalances": [20000000000, 0, 1, 1009200, 0, 1],
+      "preTokenBalances": [],
+      "rewards": [],
+      "status": {
+        "Ok": null
+      }
+    },
+    "slot": 871,
+    "transaction": {
+      "message": {
+        "accountKeys": [
+          "FpZSvaqguQ2iqcJ8Xmc9AxTs4sUP7jJgJoFp8Hnj8a9P",
+          "CyCbCVxJUzFbNnZGb4qXXVFMqGDK78ESX8zgeYZ4NVnt",
+          "11111111111111111111111111111111",
+          "SysvarRent111111111111111111111111111111111",
+          "597WvLN1xZX3qdsvvLmK2gPxYzTkArH6NxW14zYXAmZU",
+          "7w4ooixh9TFgfmcCUsDJzHd9QqDKyxz4Mq1Bke6PVXaY"
+        ],
+        "header": {
+          "numReadonlySignedAccounts": 0,
+          "numReadonlyUnsignedAccounts": 4,
+          "numRequiredSignatures": 1
+        },
+        "instructions": [
+          {
+            "accounts": [0, 1, 4, 2, 5, 3],
+            "data": "cQPTgBg2iXH3v5wcvgCwvrs",
+            "programIdIndex": 5
+          }
+        ],
+        "recentBlockhash": "F1sX51CN2S14gndASNYKbEUqSZt9gtfQxcd15YE3LeJt"
+      },
+      "signatures": [
+        "4AikRmP4Xnx5j7DBjESjGyTh34Nwrun9ncT2z5ovfoBGeH996uNptgQXdAQKEPvHnp7PYfijsMhuoAUbeSQmoWyy"
+      ]
+    }
+  },
+  "id": 1
+}

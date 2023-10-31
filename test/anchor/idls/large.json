@@ -1,0 +1,1568 @@
+{
+  "version": "1.11.0",
+  "name": "collateral_manager",
+  "instructions": [
+    {
+      "name": "createRealm",
+      "accounts": [
+        {
+          "name": "realm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "realmAuthority",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": "CreateRealmArgs"
+          }
+        }
+      ]
+    },
+    {
+      "name": "updateRealm",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": "UpdateRealmArgs"
+          }
+        }
+      ]
+    },
+    {
+      "name": "closeRealm",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "rentCollector",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "realm",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "changeAdmin",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "newAdmin",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "changeBeneficiary",
+      "accounts": [
+        {
+          "name": "beneficiary",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "newBeneficiary",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "changeBot",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "newBot",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "withdrawTreasury",
+      "accounts": [
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realmAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "beneficiary",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": {
+            "option": "u64"
+          }
+        }
+      ]
+    },
+    {
+      "name": "createCollateralMetadata",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "rentPayer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "realmAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collateralMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collateralMetadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "name": "uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "updateCollateralMetadata",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "realmAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collateralMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collateralMetadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "name": "uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "createPool",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolAuthority",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "compoundingTick",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "closePool",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "rentCollector",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "createVault",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vaultAuthority",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "treasuryMint",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "updateVault",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "isActive",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "closeVault",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "rentCollector",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "createStrategy",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "strategy",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "authority",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "closeStrategy",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "rentCollector",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "strategy",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "depositToStrategy",
+      "accounts": [
+        {
+          "name": "bot",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "strategy",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["vault stablecoin token account"]
+        },
+        {
+          "name": "strategyTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["realm stablecoin token account"]
+        },
+        {
+          "name": "vaultAuthority",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["stablecoin vault authority"]
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "depositToPool",
+      "accounts": [
+        {
+          "name": "compounder",
+          "accounts": [
+            {
+              "name": "realm",
+              "isMut": false,
+              "isSigner": false
+            },
+            {
+              "name": "pool",
+              "isMut": true,
+              "isSigner": false
+            },
+            {
+              "name": "collateralMint",
+              "isMut": true,
+              "isSigner": false
+            },
+            {
+              "name": "poolCollateralAta",
+              "isMut": true,
+              "isSigner": false
+            },
+            {
+              "name": "realmAuthority",
+              "isMut": false,
+              "isSigner": false,
+              "docs": ["1USD mint authority"]
+            },
+            {
+              "name": "poolAuthority",
+              "isMut": false,
+              "isSigner": false
+            },
+            {
+              "name": "tokenProgram",
+              "isMut": false,
+              "isSigner": false
+            }
+          ]
+        },
+        {
+          "name": "bot",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "strategyAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "strategy",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "realmCollateralAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["realm 1USD token account"]
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "depositToVault",
+      "accounts": [
+        {
+          "name": "compounder",
+          "accounts": [
+            {
+              "name": "realm",
+              "isMut": false,
+              "isSigner": false
+            },
+            {
+              "name": "pool",
+              "isMut": true,
+              "isSigner": false
+            },
+            {
+              "name": "collateralMint",
+              "isMut": true,
+              "isSigner": false
+            },
+            {
+              "name": "poolCollateralAta",
+              "isMut": true,
+              "isSigner": false
+            },
+            {
+              "name": "realmAuthority",
+              "isMut": false,
+              "isSigner": false,
+              "docs": ["1USD mint authority"]
+            },
+            {
+              "name": "poolAuthority",
+              "isMut": false,
+              "isSigner": false
+            },
+            {
+              "name": "tokenProgram",
+              "isMut": false,
+              "isSigner": false
+            }
+          ]
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true,
+          "docs": ["anonymous user"]
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["anonymous user stablecoin token account"]
+        },
+        {
+          "name": "realmTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["realm stablecoin token account"]
+        },
+        {
+          "name": "vaultTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["vault stablecoin token account"]
+        },
+        {
+          "name": "vaultAuthority",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["stablecoin vault authority"]
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "initDepositReceipt",
+      "accounts": [
+        {
+          "name": "rentPayer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "depositReceipt",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "user",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "initStakeReceipt",
+      "accounts": [
+        {
+          "name": "rentPayer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeReceipt",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "user",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "deposit",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "collateralMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "depositReceipt",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userCollateralAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["user 1USD token account"]
+        },
+        {
+          "name": "userTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["user stablecoin token account"]
+        },
+        {
+          "name": "vaultTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["vault stablecoin token account"]
+        },
+        {
+          "name": "vaultAuthority",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["stablecoin vault authority"]
+        },
+        {
+          "name": "realmAuthority",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["1USD mint authority"]
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "withdraw",
+      "accounts": [
+        {
+          "name": "redeem",
+          "accounts": [
+            {
+              "name": "user",
+              "isMut": false,
+              "isSigner": true
+            },
+            {
+              "name": "realm",
+              "isMut": false,
+              "isSigner": false
+            },
+            {
+              "name": "vault",
+              "isMut": true,
+              "isSigner": false
+            },
+            {
+              "name": "collateralMint",
+              "isMut": true,
+              "isSigner": false
+            },
+            {
+              "name": "treasuryMint",
+              "isMut": false,
+              "isSigner": false
+            },
+            {
+              "name": "depositReceipt",
+              "isMut": false,
+              "isSigner": false
+            },
+            {
+              "name": "userCollateralAta",
+              "isMut": true,
+              "isSigner": false,
+              "docs": ["user 1USD token account"]
+            },
+            {
+              "name": "tokenProgram",
+              "isMut": false,
+              "isSigner": false
+            }
+          ]
+        },
+        {
+          "name": "userTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["user stablecoin token account"]
+        },
+        {
+          "name": "vaultTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["vault stablecoin token account"]
+        },
+        {
+          "name": "realmTreasuryAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["realm stablecoin token account"]
+        },
+        {
+          "name": "vaultAuthority",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["stablecoin vault authority"]
+        },
+        {
+          "name": "realmAuthority",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["1USD mint authority"]
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "stake",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakeReceipt",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userCollateralAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["user 1USD token account"]
+        },
+        {
+          "name": "poolCollateralAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["staking pool 1USD vault"]
+        },
+        {
+          "name": "poolAuthority",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["staking pool authority"]
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "unstake",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakeReceipt",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userCollateralAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["user 1USD token account"]
+        },
+        {
+          "name": "poolCollateralAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["staking pool 1USD vault"]
+        },
+        {
+          "name": "poolAuthority",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["staking pool authority"]
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "performBurn",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "collateralMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasuryMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "depositReceipt",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userCollateralAta",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["user 1USD token account"]
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "performFreeze",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "realm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collateralMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "realmAuthority",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["1USD mint & freeze authority"]
+        },
+        {
+          "name": "srcTokenAccount",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["source 1USD token account"]
+        },
+        {
+          "name": "dstTokenAccount",
+          "isMut": true,
+          "isSigner": false,
+          "docs": ["destination 1USD token account"]
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Pool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "realm",
+            "type": "publicKey"
+          },
+          {
+            "name": "totalLpAmount",
+            "docs": ["total 1USD LP amount"],
+            "type": "u64"
+          },
+          {
+            "name": "dustAmount",
+            "docs": ["dust amount in yield reward calculation"],
+            "type": "u64"
+          },
+          {
+            "name": "lastYieldAmount",
+            "docs": [
+              "total yield reward amount in the last compounding period"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "currentYieldAmount",
+            "docs": ["total yield reward amount in current compounding period"],
+            "type": "u64"
+          },
+          {
+            "name": "compoundingTick",
+            "docs": ["compounding period in seconds"],
+            "type": "u32"
+          },
+          {
+            "name": "lastUpdateTs",
+            "docs": ["last yield reward distribution timestamp"],
+            "type": "u32"
+          },
+          {
+            "name": "lpIndexN2",
+            "docs": ["1USD LP index for (n-2)th compounding period"],
+            "type": {
+              "defined": "LpRate"
+            }
+          },
+          {
+            "name": "lpIndexN1",
+            "docs": ["1USD LP index for (n-1)th compounding period"],
+            "type": {
+              "defined": "LpRate"
+            }
+          },
+          {
+            "name": "lpIndex",
+            "docs": ["1USD LP index for current compounding period"],
+            "type": {
+              "defined": "LpRate"
+            }
+          },
+          {
+            "name": "authorityBump",
+            "docs": ["PDA bump for stake pool authority"],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Realm",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "docs": ["super administrator"],
+            "type": "publicKey"
+          },
+          {
+            "name": "bot",
+            "docs": ["routing strategy manager"],
+            "type": "publicKey"
+          },
+          {
+            "name": "beneficiary",
+            "docs": ["beneficiary account"],
+            "type": "publicKey"
+          },
+          {
+            "name": "collateralMint",
+            "docs": ["1USD token as a collateral for stablecoins"],
+            "type": "publicKey"
+          },
+          {
+            "name": "redemptionDelay",
+            "docs": ["redemption delay in seconds"],
+            "type": "u32"
+          },
+          {
+            "name": "unstakingDelay",
+            "docs": ["unstaking delay in seconds"],
+            "type": "u32"
+          },
+          {
+            "name": "depositFee",
+            "docs": ["x% of stablecoin deposit amount for team treasury"],
+            "type": {
+              "defined": "Fee"
+            }
+          },
+          {
+            "name": "redemptionFee",
+            "docs": ["x% of stablecoin redemption amount for team treasury"],
+            "type": {
+              "defined": "Fee"
+            }
+          },
+          {
+            "name": "stakingFee",
+            "docs": ["x% of 1USD stake amount for team treasury"],
+            "type": {
+              "defined": "Fee"
+            }
+          },
+          {
+            "name": "unstakingFee",
+            "docs": ["x% of 1USD unstake amount for team treasury"],
+            "type": {
+              "defined": "Fee"
+            }
+          },
+          {
+            "name": "performFee",
+            "docs": ["x% of stablecoin yield reward amount for team treasury"],
+            "type": {
+              "defined": "Fee"
+            }
+          },
+          {
+            "name": "emergencyFlag",
+            "docs": ["`true` in case of emergency"],
+            "type": "bool"
+          },
+          {
+            "name": "authorityBump",
+            "docs": [
+              "PDA bump for realm authority as team treasury vault authority"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Strategy",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "realm",
+            "type": "publicKey"
+          },
+          {
+            "name": "strategyAuthority",
+            "docs": ["strategy vault authority", "PDA of router programs"],
+            "type": "publicKey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DepositReceipt",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "lastDepositTs",
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StakeReceipt",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "docs": ["address to aggregate staked users"],
+            "type": "publicKey"
+          },
+          {
+            "name": "lpAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lastStakeTs",
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Vault",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "realm",
+            "type": "publicKey"
+          },
+          {
+            "name": "treasuryMint",
+            "docs": ["stablecoin address"],
+            "type": "publicKey"
+          },
+          {
+            "name": "totalInputAmount",
+            "docs": ["total input amount, wrapped amount"],
+            "type": "u64"
+          },
+          {
+            "name": "totalOutputAmount",
+            "type": "u64"
+          },
+          {
+            "name": "isActive",
+            "type": "bool"
+          },
+          {
+            "name": "authorityBump",
+            "docs": ["PDA bump for vault authority"],
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "Fee",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "basisPoints",
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LpRate",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "basisPoints",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CreateRealmArgs",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "publicKey"
+          },
+          {
+            "name": "bot",
+            "type": "publicKey"
+          },
+          {
+            "name": "beneficiary",
+            "type": "publicKey"
+          },
+          {
+            "name": "collateralMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "redemptionDelay",
+            "type": "u32"
+          },
+          {
+            "name": "unstakingDelay",
+            "type": "u32"
+          },
+          {
+            "name": "depositFeeBasisPoints",
+            "type": "u16"
+          },
+          {
+            "name": "redemptionFeeBasisPoints",
+            "type": "u16"
+          },
+          {
+            "name": "stakingFeeBasisPoints",
+            "type": "u16"
+          },
+          {
+            "name": "unstakingFeeBasisPoints",
+            "type": "u16"
+          },
+          {
+            "name": "performFeeBasisPoints",
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UpdateRealmArgs",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "redemptionDelay",
+            "type": {
+              "option": "u32"
+            }
+          },
+          {
+            "name": "unstakingDelay",
+            "type": {
+              "option": "u32"
+            }
+          },
+          {
+            "name": "depositFeeBasisPoints",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "redemptionFeeBasisPoints",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "stakingFeeBasisPoints",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "unstakingFeeBasisPoints",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "performFeeBasisPoints",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "emergencyFlag",
+            "type": {
+              "option": "bool"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "AccessDenied",
+      "msg": "Access denied"
+    },
+    {
+      "code": 6001,
+      "name": "ServiceNotAvailable",
+      "msg": "Service not available"
+    },
+    {
+      "code": 6002,
+      "name": "CollatMintInvalid",
+      "msg": "Invalid 1USD token mint"
+    },
+    {
+      "code": 6003,
+      "name": "CollatTokenAccountOwnerInvalid",
+      "msg": "Invalid 1USD token account owner"
+    },
+    {
+      "code": 6004,
+      "name": "CollatTokenBalanceInsufficient",
+      "msg": "Insufficient 1USD token balance"
+    },
+    {
+      "code": 6005,
+      "name": "CollatPositionAmountInsufficient",
+      "msg": "Insufficient 1USD position amount"
+    },
+    {
+      "code": 6006,
+      "name": "TreasuryMintInvalid",
+      "msg": "Invalid stable token mint"
+    },
+    {
+      "code": 6007,
+      "name": "TreasuryTokenAccountOwnerInvalid",
+      "msg": "Invalid stable token account owner"
+    },
+    {
+      "code": 6008,
+      "name": "TreasuryTokenBalanceInsufficient",
+      "msg": "Insufficient stable token balance"
+    },
+    {
+      "code": 6009,
+      "name": "UserRedemptionNotAvailable",
+      "msg": "Redemption is not available"
+    }
+  ]
+}

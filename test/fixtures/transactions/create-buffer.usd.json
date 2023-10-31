@@ -1,0 +1,66 @@
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "blockTime": 1666995358,
+    "meta": {
+      "err": null,
+      "fee": 10000,
+      "innerInstructions": [],
+      "loadedAddresses": {
+        "readonly": [],
+        "writable": []
+      },
+      "logMessages": [
+        "Program 11111111111111111111111111111111 invoke [1]",
+        "Program 11111111111111111111111111111111 success",
+        "Program 1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb invoke [1]",
+        "Program log: Instruction: IdlCreateBuffer",
+        "Program 1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb consumed 3081 of 400000 compute units",
+        "Program 1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb success"
+      ],
+      "postBalances": [6007809080, 15096240, 1, 1141440, 1009200],
+      "postTokenBalances": [],
+      "preBalances": [6022915320, 0, 1, 1141440, 1009200],
+      "preTokenBalances": [],
+      "rewards": [],
+      "status": {
+        "Ok": null
+      }
+    },
+    "slot": 157973844,
+    "transaction": {
+      "message": {
+        "accountKeys": [
+          "BjKVLpkfgE1RzYdR6V417GpZ2QpMmwgQzxtc1wYGDLNJ",
+          "3s1nymBqKjEhftgQJhxktXLvTn9whxdLu2QV6hR6b29V",
+          "11111111111111111111111111111111",
+          "1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb",
+          "SysvarRent111111111111111111111111111111111"
+        ],
+        "header": {
+          "numReadonlySignedAccounts": 0,
+          "numReadonlyUnsignedAccounts": 3,
+          "numRequiredSignatures": 2
+        },
+        "instructions": [
+          {
+            "accounts": [0, 1],
+            "data": "11117UCiSsxCy5APEJAcYEnp3GfK6h34G9sxzXZwhmD7rrzgJgHFLMEv6YssFYjYDC3kwo",
+            "programIdIndex": 2
+          },
+          {
+            "accounts": [1, 0, 4],
+            "data": "pxNa8qvd4Ae4",
+            "programIdIndex": 3
+          }
+        ],
+        "recentBlockhash": "CUh28xY7NMzvqu7nqEMhRoARx8fp3UZHJJYiq967QXG1"
+      },
+      "signatures": [
+        "2aMETksrJRhqgzvQKF9MvnidfBuSCpd82TEG4DTdcSL66fADDsr4d6PdY1gWyYDyFPJ1jMdXxi1pwXY4TPzkunyU",
+        "3YvGnENqD5cS9nFTuA1e4rNzAhCQ57S5tNpGF4J1V5md5FdyUd22o9YLdVc8UgXvgxBn1HTkbFbMpJW6yokddLEq"
+      ]
+    }
+  },
+  "id": 1
+}

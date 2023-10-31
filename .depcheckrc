@@ -1,0 +1,1 @@
+ignores: ['esbuild', 'esbuild-runner', '@metaplex-foundation/amman', 'supports-color']

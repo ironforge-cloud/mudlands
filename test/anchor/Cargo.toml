@@ -1,0 +1,16 @@
+[package]
+name = "anchor_testbed"
+version = "0.1.0"
+description = "Testbed"
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "basic_4"
+
+[features]
+no-entrypoint = []
+cpi = ["no-entrypoint"]
+
+[dependencies]
+anchor-lang = "0.27.0"

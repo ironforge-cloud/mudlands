@@ -27,10 +27,9 @@ To try an example have a look at [`./examples/check-idl.ts`](./examples/check-id
 You can try it via `yarn ex:usd`, but replace `SOLANA_MAINNET` with an RPC node like helius
 first, i.e.:
 
-```
+```sh
 RPC=$HELIUS_MAIN yarn ex:usd
 ```
-
 
 ## LICENSE
 

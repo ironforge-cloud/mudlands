@@ -2,9 +2,9 @@
   "name": "@ironforge/mudlands",
   "version": "0.0.0",
   "description": "Discovers all IDLs of a program.",
-  "main": "src/mudlands.ts",
-  "types": "src/mudlands.ts",
   "private": true,
+  "main": "dist/src/mudlands.js",
+  "types": "dist/src/mudlands.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "prettier --check .",

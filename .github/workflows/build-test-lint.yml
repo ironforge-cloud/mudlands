@@ -1,0 +1,33 @@
+name: Build+Test+Lint
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  mudlands_build-test-lint:
+    runs-on:
+      group: Default
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Build+Test+Lint
+        uses: ./.github/actions/build-test-lint
+        with:
+          node-version: ${{ matrix.node-version }}
+          working-directory: .
+          amman: true
+
+      - name: Integration Test
+        run: yarn test:ix
+        shell: bash
+        working-directory: .

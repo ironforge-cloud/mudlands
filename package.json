@@ -1,10 +1,9 @@
 {
   "name": "@ironforge/mudlands",
   "version": "0.0.0",
-  "description": "Discovers all IDLs of a program.",
-  "main": "src/mudlands.ts",
-  "types": "src/mudlands.ts",
-  "private": true,
+  "description": "Discovers all IDLs ever published for a Solana program.",
+  "main": "dist/src/mudlands.js",
+  "types": "dist/src/mudlands.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "prettier --check .",
@@ -15,19 +14,22 @@
     "test:ix": "yarn test:ix:anchor && yarn test:ix:misc",
     "test:ix:anchor": "./test/anchor/run-ix.sh",
     "test:ix:misc": "node --test --test-reporter=spec -r esbuild-runner/register ./test/ix/*.ts",
-    "ex:cndy": "node -r esbuild-runner/register ./examples/cndy-idls.ts",
-    "ex:usd": "node -r esbuild-runner/register ./examples/usd-idls.ts",
+    "ex:cndy": "node -r esbuild-runner/register ./examples/check-idl.ts cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ",
+    "ex:usd": "node -r esbuild-runner/register ./examples/check-idl.ts 1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb",
     "check:idl": "node -r esbuild-runner/register ./examples/check-idl.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ironforge-cloud/mudlands.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ironforge-cloud/mudlands/issues"
   },
   "homepage": "https://github.com/ironforge-cloud/mudlands#readme",
+  "files": [
+    "dist/src"
+  ],
   "dependencies": {
     "@noble/ed25519": "^1.7.3",
     "@noble/hashes": "^1.3.2",

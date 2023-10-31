@@ -1,0 +1,58 @@
+name: Build+Test+Lint
+
+inputs:
+  node-version:
+    description: Version of Node.js to use
+    required: true
+  amman:
+    description: If set, Solana Validator will be installed to be used via Amman
+    required: false
+    default: false
+  test:
+    description: If set, tests will run via `yarn test`
+    required: false
+    default: true
+  working-directory:
+    description: Directory to run the action steps in
+    required: true
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Use Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'yarn'
+
+    - name: Install Dependencies
+      run: yarn install
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
+    - name: Dependency check
+      run: yarn depcheck
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
+    - name: Build
+      run: yarn build
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
+    # Optional: Install and start local Test Validator via Amman
+    - name: Install Solana for Amman
+      if: ${{ inputs.amman == 'true' }}
+      uses: ./.github/actions/install-solana
+
+    - name: Test
+      if: ${{ inputs.test == 'true' }}
+      run: yarn test
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
+    - name: Lint
+      run: yarn lint
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}

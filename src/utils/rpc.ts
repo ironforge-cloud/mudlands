@@ -44,7 +44,7 @@ export async function fetchSigs(
       `Failed to fetch signatures for ${addr} (${res.statusText})`
     )
   }
-  const body = await res.json()
+  const body: any = await res.json()
   return body.result
 }
 
@@ -71,7 +71,7 @@ export async function fetchTx(
       `Failed to fetch transaction for ${sig} (${res.statusText})`
     )
   }
-  const body = await res.json()
+  const body: any = await res.json()
   return body.result
 }
 
@@ -108,6 +108,6 @@ export async function fetchAccount(
       `Failed to fetch account info for ${address} (${res.statusText})`
     )
   }
-  const body = await res.json()
+  const body: any = await res.json()
   return body.result.value
 }

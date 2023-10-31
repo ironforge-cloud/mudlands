@@ -8,7 +8,7 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": false,
-    "noEmit": true,
+    "noEmit": false,
     "preserveWatchOutput": true,
     "emitDeclarationOnly": false,
     "importHelpers": false,
@@ -20,7 +20,8 @@
     "incremental": false,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "outDir": "dist"
   },
   "include": ["src", "test"]
 }

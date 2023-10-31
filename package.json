@@ -2,7 +2,6 @@
   "name": "@ironforge/mudlands",
   "version": "0.0.0",
   "description": "Discovers all IDLs of a program.",
-  "private": true,
   "main": "dist/src/mudlands.js",
   "types": "dist/src/mudlands.d.ts",
   "scripts": {
@@ -23,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/ironforge-cloud/mudlands.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ironforge-cloud/mudlands/issues"
   },

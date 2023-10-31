@@ -15,8 +15,8 @@
     "test:ix": "yarn test:ix:anchor && yarn test:ix:misc",
     "test:ix:anchor": "./test/anchor/run-ix.sh",
     "test:ix:misc": "node --test --test-reporter=spec -r esbuild-runner/register ./test/ix/*.ts",
-    "ex:cndy": "node -r esbuild-runner/register ./examples/cndy-idls.ts",
-    "ex:usd": "node -r esbuild-runner/register ./examples/usd-idls.ts",
+    "ex:cndy": "node -r esbuild-runner/register ./examples/check-idl.ts cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ",
+    "ex:usd": "node -r esbuild-runner/register ./examples/check-idl.ts 1USDCmv8QmvZ9JaL7bmevGsNHn7ez8TNahJzCN551sb",
     "check:idl": "node -r esbuild-runner/register ./examples/check-idl.ts"
   },
   "repository": {

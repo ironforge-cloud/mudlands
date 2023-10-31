@@ -1,6 +1,6 @@
 # Mudlands
 
-Mu _ltiple_ _I_ dl and S _olana tooling_.
+Mu _ltiple_ _I_ dl and S _olana tooling_, discovers all IDLs ever published for a Solana program.
 
 ```ts
 import { findIdls } from '@ironforge/mudlands'

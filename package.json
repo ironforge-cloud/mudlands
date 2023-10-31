@@ -1,7 +1,7 @@
 {
   "name": "@ironforge/mudlands",
   "version": "0.0.0",
-  "description": "Discovers all IDLs of a program.",
+  "description": "Discovers all IDLs ever published for a Solana program.",
   "main": "dist/src/mudlands.js",
   "types": "dist/src/mudlands.d.ts",
   "scripts": {

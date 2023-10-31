@@ -24,7 +24,7 @@ jobs:
         uses: ./.github/actions/build-test-lint
         with:
           node-version: ${{ matrix.node-version }}
-          working-directory: ./ts/mudlands
+          working-directory: .
           amman: true
 
       - name: Integration Test

@@ -7,6 +7,7 @@ import {
 } from '../types'
 import { unzipIdlAccData } from '../unzip'
 import { fetchAccount, fetchSigs, fetchTx, logDebug, logTrace } from '../utils'
+import { dumpTxs } from '../utils/dump-txs'
 import {
   extractCreateAccount,
   ExtractCreateAccountResult,
@@ -99,6 +100,7 @@ export class IdlFinder {
 
       logTrace('Transactions %O', infos)
     }
+    await dumpTxs(txs)
 
     // TODO(thlorenz):  we look at the same transaction multiple times as we
     // don't remove the ones that matched, we should improve on that
@@ -315,7 +317,7 @@ async function resolveTxsForAddress(addr: string, label: string, host: string) {
   const sigs = await fetchSigs(addr, host)
   logTrace(
     `sigs for ${label} (${addr}):`,
-    sigs.map((sig) => sig.signature)
+    sigs.map((sig) => sig.signature).join('\n')
   )
   return Promise.all(sigs.map((sig) => fetchTx(sig.signature, host)))
 }

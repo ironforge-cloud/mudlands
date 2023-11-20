@@ -1,8 +1,10 @@
 import test from 'node:test'
 import assert from 'assert/strict'
 import {
+  FOO_IDL,
   FOO_PROGRAM,
   airdropFooAuth,
+  checkFailures,
   configPaths,
   initIdl,
   parseWrites,
@@ -27,8 +29,18 @@ test('setup anchor', () => setupAnchor(paths))
 
 test('airdrop', airdropFooAuth)
 
-test('initially no idls', async () => {
-  const idlWrites = await findIdls(FOO_PROGRAM, LOCALHOST)
+test('initially no idls', async (t) => {
+  const { idls: idlWrites, failures } = await findIdls(FOO_PROGRAM, LOCALHOST)
+  checkFailures(
+    t,
+    {
+      idlAddress: FOO_IDL,
+      txsFound: false,
+      idlAccountFound: false,
+      len: 2,
+    },
+    failures
+  )
   assert.equal(idlWrites.length, 0)
 })
 
@@ -37,7 +49,8 @@ test('init idl', async () => {
 })
 
 test('after init one idl', async (t) => {
-  const idlWrites = await findIdls(FOO_PROGRAM, LOCALHOST)
+  const { idls: idlWrites, failures } = await findIdls(FOO_PROGRAM, LOCALHOST)
+  assert.equal(failures.length, 0)
   assert.equal(idlWrites.length, 1)
 
   spok(t, parseWrites(idlWrites), [{ version: '0.0.0', ...collateralIdl }])
@@ -48,7 +61,8 @@ test('upgrade idl', () => {
 })
 
 test('after one upgrade two idls', async (t) => {
-  const idlWrites = await findIdls(FOO_PROGRAM, LOCALHOST)
+  const { idls: idlWrites, failures } = await findIdls(FOO_PROGRAM, LOCALHOST)
+  assert.equal(failures.length, 0)
   assert.equal(idlWrites.length, 2)
 
   spok(t, parseWrites(idlWrites), [
@@ -62,7 +76,8 @@ test('upgrade idl again', () => {
 })
 
 test('after another upgrade three idls', async (t) => {
-  const idlWrites = await findIdls(FOO_PROGRAM, LOCALHOST)
+  const { idls: idlWrites, failures } = await findIdls(FOO_PROGRAM, LOCALHOST)
+  assert.equal(failures.length, 0)
   assert.equal(idlWrites.length, 3)
 
   spok(t, parseWrites(idlWrites), [

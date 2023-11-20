@@ -1,6 +1,7 @@
 export * from './amman'
 export * from './anchor-tasks'
 export * from './setup-anchor'
+export * from './check-failures'
 
 export function parseWrites(writes: { idl: Buffer }[]) {
   return writes

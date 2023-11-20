@@ -21,6 +21,11 @@ import {
   ExtractSetBufferResult,
 } from './extract-setbuffer-tx'
 
+export type IdlFailure = {
+  addr: string
+  err: Error
+}
+
 type IdlWrite = {
   source: IdlSource
   startSlot: number
@@ -54,23 +59,46 @@ export class IdlFinder {
     readonly host: string
   ) {}
 
-  async findIdls(): Promise<DeserializedIdlInfo[]> {
-    const txIdls = await this.findIdlAccountTxs()
-    if (txIdls.length > 0) return txIdls
+  async findIdls(): Promise<{
+    idls: DeserializedIdlInfo[]
+    failures: IdlFailure[]
+  }> {
+    const { idls: txIdls, failures } = await this.findIdlAccountTxs()
+    if (txIdls.length > 0) return { idls: txIdls, failures }
 
-    logDebug(
+    const txNotFoundErr = new Error(
       `Unable to find transactions for IDL address '${this.idlAddr}', trying to load account data`
     )
+    const loadIdlFailures = [{ addr: '<None found>', err: txNotFoundErr }]
+    logDebug(txNotFoundErr.message)
+
     // If we didn't find any IDL via transactions it could be due to the
     // history of the RPC not reaching back far enough.
     // Therefore we try to load the IDL that currently stored in the IDL account
     const account = await fetchAccount(this.idlAddr, this.host)
     if (account == null) {
-      logDebug(`Unable to find IDL at address '${this.idlAddr}'`)
-      return []
+      const accNotFoundErr = new Error(
+        `Unable to find IDL at address '${this.idlAddr}'`
+      )
+      logDebug(accNotFoundErr.message)
+      return {
+        idls: [],
+        failures: [
+          ...loadIdlFailures,
+          { addr: this.idlAddr, err: accNotFoundErr },
+        ],
+      }
     }
     const data = Buffer.from(account.data[0], 'base64')
-    const unzipped = await unzipIdlAccData(data)
+    let unzipped
+    try {
+      unzipped = await unzipIdlAccData(data)
+    } catch (err: any) {
+      return {
+        idls: [],
+        failures: [...loadIdlFailures, { addr: this.idlAddr, err }],
+      }
+    }
 
     // We set slots to 0 since we must assume that all accounts were written
     // while this IDL was in use
@@ -81,10 +109,16 @@ export class IdlFinder {
       idl: unzipped,
       addr: this.idlAddr,
     }
-    return [idlWrite]
+    return {
+      idls: [idlWrite],
+      failures: loadIdlFailures,
+    }
   }
 
-  async findIdlAccountTxs(): Promise<DeserializedIdlInfo[]> {
+  async findIdlAccountTxs(): Promise<{
+    idls: DeserializedIdlInfo[]
+    failures: IdlFailure[]
+  }> {
     const txs = (
       await resolveTxsForAddress(this.idlAddr, 'IDL address', this.host)
     ).filter((tx) => tx.meta?.err == null)
@@ -193,23 +227,30 @@ SetBuffer: %d`,
 
   private async _deserializeIdlWrites(
     grouped: Map<string, IdlWrite>
-  ): Promise<DeserializedIdlInfo[]> {
+  ): Promise<{ idls: DeserializedIdlInfo[]; failures: IdlFailure[] }> {
     const idls = []
+    const failures: IdlFailure[] = []
     for (const [addr, write] of grouped.entries()) {
       write.writes.sort(sortBySlot)
-      const idl = await deserializeWriteTxData(write.writes.map((x) => x.data))
-      if (idl != null) {
-        idls.push({
-          source: write.source,
-          startSlot: write.startSlot,
-          slot: write.endSlot,
-          idl,
-          addr,
-        })
+      try {
+        const idl = await deserializeWriteTxData(
+          write.writes.map((x) => x.data)
+        )
+        if (idl != null) {
+          idls.push({
+            source: write.source,
+            startSlot: write.startSlot,
+            slot: write.endSlot,
+            idl,
+            addr,
+          })
+        }
+      } catch (err: any) {
+        failures.push({ addr, err })
       }
     }
     idls.sort(sortBySlot)
-    return idls
+    return { idls, failures }
   }
 
   private _groupIdlWrites(): Map<string, IdlWrite> {

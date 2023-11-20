@@ -5,9 +5,11 @@
   "main": "dist/src/mudlands.js",
   "types": "dist/src/mudlands.d.ts",
   "scripts": {
+    "amman:start": "(cd test/anchor && amman start)",
+    "amman:stop": "amman stop",
     "build": "tsc",
-    "lint": "prettier --check .",
-    "lint:fix": "prettier --write .",
+    "lint": "prettier --check src/ examples/ test/ README.md",
+    "lint:fix": "prettier --write src/ examples/ test/ README.md",
     "depcheck": "depcheck",
     "depcheck:fix": "for m in `depcheck --json | jq '.missing | keys[]' --raw-output`; do yarn add $m; done",
     "test": "node --test --test-reporter=spec -r esbuild-runner/register ./test/*.ts",

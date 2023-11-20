@@ -17,9 +17,12 @@ const RPC = process.env.RPC ?? SOLANA_MAINNET
 
 async function main() {
   console.error('Checking IDLs on RPC %s', RPC)
-  const idlWrites = await findIdls(PROGRAM_ID, RPC)
+  const { idls: idlWrites, failures } = await findIdls(PROGRAM_ID, RPC)
   console.log(JSON.stringify(parseWrites(idlWrites), null, 2))
   console.log('Total of %d idls', idlWrites.length)
+  if (failures.length > 0) {
+    console.log('Failures: %O', failures)
+  }
 }
 
 main()

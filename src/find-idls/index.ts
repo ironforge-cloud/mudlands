@@ -25,7 +25,7 @@
 export * from './extract-createaccount-tx'
 export * from './extract-idlwrite-tx'
 export * from './extract-setbuffer-tx'
-export { DeserializedIdlInfo } from './idl-finder'
+export { DeserializedIdlInfo, IdlFailure } from './idl-finder'
 
 import { idlAddrForProgram } from '../utils'
 import { IdlFinder } from './idl-finder'
